@@ -1,0 +1,35 @@
+{
+	"storeIds": ["017", "070", "012"],
+	"products": [
+		{
+			"name": "SKOTTERUD",
+			"id": "30309875",
+			"productType": "Säng"
+		},
+		{
+			"name": "SAULAND",
+			"id": "10405482",
+			"productType": "Bäddmadrass"
+		},
+		{
+			"name": "SULTAN",
+			"id": "30024943",
+			"productType": "Kopplingsbeslag"
+		},
+		{
+			"name": "ÄNGSKORN",
+			"id": "20461991",
+			"productType": "Maddrasskydd"
+		},
+		{
+			"name": "BRYNILEN",
+			"id": "40299692",
+			"productType": "Ben"
+		},
+		{
+			"name": "STRANDSLUMMER",
+			"id": "70579790",
+			"productType": "Påslakan"
+		}
+	]
+}
