@@ -30,6 +30,16 @@
 			"name": "STRANDSLUMMER",
 			"id": "70579790",
 			"productType": "Påslakan"
+		},
+		{
+			"name": "NATTSLÄNDA",
+			"id": "20508012",
+			"productType": "Påslakan"
+		},
+		{
+			"name": "ULLVIDE",
+			"id": "30484303",
+			"productType": "Dra-på-lakan"
 		}
 	]
 }
