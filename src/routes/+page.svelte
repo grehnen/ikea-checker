@@ -22,6 +22,8 @@
 
 	onMount(async () => {
 		const storeObjects = stores.findById(json.storeIds);
+		storeObjects.sort((a, b) => json.storeIds.indexOf(a.buCode) - json.storeIds.indexOf(b.buCode));
+
 		const availabilityObjects = await availabilities(
 			storeObjects,
 			json.products.map((p) => p.id)
