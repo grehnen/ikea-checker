@@ -101,7 +101,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		height: 100vh;
+		overflow-y: auto;
 	}
 	.title {
 		font-size: 2em;
