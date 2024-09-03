@@ -3,12 +3,8 @@
 	import { onMount } from 'svelte';
 	import { stores, availabilities } from 'ikea-availability-checker';
 
-	let currentTime = new Date().toLocaleTimeString();
-	setInterval(() => {
-		currentTime = new Date().toLocaleTimeString();
-	}, 1000);
-
 	let availabilityList: storeAvailability[] = [];
+	let lastFetchTime: string | undefined;
 
 	interface storeAvailability {
 		storename: string;
@@ -20,7 +16,7 @@
 		}[];
 	}
 
-	onMount(async () => {
+	async function fetchAvailability() {
 		const storeObjects = stores.findById(json.storeIds);
 		storeObjects.sort((a, b) => json.storeIds.indexOf(a.buCode) - json.storeIds.indexOf(b.buCode));
 
@@ -28,6 +24,7 @@
 			storeObjects,
 			json.products.map((p) => p.id)
 		);
+
 		const list = [];
 		for (const store of storeObjects) {
 			const storeAvailability: storeAvailability = {
@@ -47,10 +44,21 @@
 				}
 			}
 			list.push(storeAvailability);
+			lastFetchTime = new Date().toLocaleTimeString();
 		}
+		return list;
+	}
 
-		availabilityList = list;
+	onMount(async () => {
+		availabilityList = await fetchAvailability();
 	});
+
+	setInterval(
+		async () => {
+			availabilityList = await fetchAvailability();
+		},
+		10 * 60 * 1000
+	);
 
 	function getProductRowClass(product: { name: string; quantity: number }) {
 		if (product.quantity < 2) {
@@ -65,6 +73,9 @@
 
 <div class="container">
 	<div class="title">Ikea Stock Checker</div>
+	{#if lastFetchTime}
+		<div>Data fetched: {lastFetchTime.substring(0, 5)}</div>
+	{/if}
 	{#each availabilityList as store}
 		<div class="store">
 			<h2 class="store-name">{store.storename}</h2>
