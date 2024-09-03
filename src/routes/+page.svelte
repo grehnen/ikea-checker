@@ -65,8 +65,6 @@
 
 <div class="container">
 	<div class="title">Ikea Stock Checker</div>
-	<div class="time">{currentTime}</div>
-	<div class="divider" />
 	{#each availabilityList as store}
 		<div class="store">
 			<h2 class="store-name">{store.storename}</h2>
@@ -74,7 +72,7 @@
 				<thead>
 					<tr>
 						<th>Namn</th>
-						<th>Kvantitet</th>
+						<th>Antal</th>
 						<th>Produkttyp</th>
 					</tr>
 				</thead>
@@ -101,11 +99,12 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		width: 100%;
 		overflow-y: auto;
 	}
 	.title {
-		font-size: 2em;
-		margin-bottom: 20px;
+		font-size: 1.8em;
+		margin-bottom: 10px;
 	}
 	.time {
 		font-size: 1.5em;
@@ -115,6 +114,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		max-width: 100%;
 	}
 	.availability-table {
 		border-collapse: collapse;
@@ -126,6 +126,10 @@
 		border: 1px solid green; /* Add gridlines */
 		padding: 8px;
 		text-align: left;
+		text-overflow: ellipsis;
+		word-wrap: break-word;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.divider {
 		width: 100%;
