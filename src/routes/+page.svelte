@@ -74,7 +74,7 @@
 <div class="container">
 	<div class="title">Ikea Stock Checker</div>
 	{#if lastFetchTime}
-		<div>Data fetched: {lastFetchTime.substring(0, 5)}</div>
+		<div>Data fetched: {lastFetchTime.substring(0, lastFetchTime.length - 3)}</div>
 	{/if}
 	{#each availabilityList as store}
 		<div class="store">
