@@ -13,6 +13,7 @@
 			id: string;
 			productType: string;
 			quantity: number;
+			rare?: boolean;
 		}[];
 	}
 
@@ -39,12 +40,16 @@
 						name: product.name,
 						id: product.id,
 						productType: product.productType,
-						quantity: availability.stock
+						quantity: availability.stock,
+						rare: product.rare
 					});
 				}
 			}
 			list.push(storeAvailability);
-			lastFetchTime = new Date().toLocaleTimeString();
+			lastFetchTime = new Date().toLocaleTimeString('sv-SE', {
+				hour: '2-digit',
+				minute: '2-digit'
+			});
 		}
 		return list;
 	}
@@ -60,9 +65,11 @@
 		10 * 60 * 1000
 	);
 
-	function getProductRowClass(product: { name: string; quantity: number }) {
-		if (product.quantity < 2) {
+	function getProductRowClass(product: { name: string; quantity: number; rare?: boolean }) {
+		if (product.quantity === 0) {
 			return 'out-of-stock';
+		} else if (product.rare) {
+			return 'rare-in-stock';
 		} else if (product.quantity < 5) {
 			return 'low-stock';
 		} else {
@@ -74,7 +81,7 @@
 <div class="container">
 	<div class="title">Ikea Stock Checker</div>
 	{#if lastFetchTime}
-		<div>Data fetched: {lastFetchTime.substring(0, lastFetchTime.length - 3)}</div>
+		<div>Data fetched: {lastFetchTime}</div>
 	{/if}
 	{#each availabilityList as store}
 		<div class="store">
@@ -161,5 +168,32 @@
 	}
 	a {
 		color: inherit;
+	}
+	.rare-in-stock {
+		animation: rainbow 3s linear;
+		animation-iteration-count: infinite;
+		color: white;
+	}
+
+	@keyframes rainbow {
+		100%,
+		0% {
+			background-color: rgb(255, 0, 0);
+		}
+		16% {
+			background-color: rgb(255, 255, 0);
+		}
+		33% {
+			background-color: rgb(0, 255, 0);
+		}
+		50% {
+			background-color: rgb(0, 255, 255);
+		}
+		66% {
+			background-color: rgb(0, 0, 255);
+		}
+		83% {
+			background-color: rgb(255, 0, 255);
+		}
 	}
 </style>

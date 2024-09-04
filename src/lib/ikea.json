@@ -4,7 +4,8 @@
 		{
 			"name": "SAULAND",
 			"id": "10405482",
-			"productType": "Bäddmadrass"
+			"productType": "Bäddmadrass",
+			"rare": true
 		},
 		{
 			"name": "SULTAN",
